@@ -1,12 +1,12 @@
 {
-  "name": "mcp-template-ts",
+  "name": "mcp-autonomous-dev-team",
   "version": "1.0.0",
-  "description": "MCP server template for TypeScript",
+  "description": "MCP server for autonomous development teams that can take PRDs and produce working prototypes",
   "license": "MIT",
-  "author": "Better Stack (https://betterstack.com)",
+  "author": "Autonomous Dev Team",
   "type": "module",
   "bin": {
-    "mcp-template-ts": "dist/index.js"
+    "mcp-autonomous-dev-team": "dist/index.js"
   },
   "files": [
     "dist"
@@ -14,14 +14,32 @@
   "scripts": {
     "build": "tsc && shx chmod +x dist/*.js",
     "prepare": "npm run build",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm start"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.0",
-    "zod": "^3.24.2"
+    "zod": "^3.24.2",
+    "openai": "^4.28.0",
+    "@anthropic-ai/sdk": "^0.18.0",
+    "simple-git": "^3.22.0",
+    "fs-extra": "^11.2.0",
+    "yaml": "^2.3.4",
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "inquirer": "^9.2.15",
+    "glob": "^10.3.10",
+    "ejs": "^3.1.9",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1"
   },
   "devDependencies": {
     "shx": "^0.3.4",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.11.16"
   }
 }
