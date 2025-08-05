@@ -1,12 +1,12 @@
 {
-  "name": "mcp-template-ts",
+  "name": "mcp-autonomous-development-team",
   "version": "1.0.0",
-  "description": "MCP server template for TypeScript",
+  "description": "MCP server for autonomous development team - takes PRDs and generates complete prototypes",
   "license": "MIT",
-  "author": "Better Stack (https://betterstack.com)",
+  "author": "Autonomous Development Team",
   "type": "module",
   "bin": {
-    "mcp-template-ts": "dist/index.js"
+    "mcp-autonomous-development-team": "dist/index.js"
   },
   "files": [
     "dist"
@@ -21,7 +21,16 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "shx": "^0.3.4",
     "typescript": "^5.7.3"
-  }
+  },
+  "keywords": [
+    "mcp",
+    "autonomous",
+    "development",
+    "prototype",
+    "code-generation",
+    "ai-agents"
+  ]
 }
