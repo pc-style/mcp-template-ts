@@ -23,6 +23,7 @@
     "zod": "^3.24.2",
     "openai": "^4.28.0",
     "@anthropic-ai/sdk": "^0.12.0",
+    "@google/generative-ai": "^0.21.0",
     "simple-git": "^3.22.0",
     "fs-extra": "^11.2.0",
     "path": "^0.12.7",

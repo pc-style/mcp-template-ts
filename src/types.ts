@@ -167,7 +167,7 @@ export type AgentTask = z.infer<typeof AgentTaskSchema>;
 
 // LLM Provider Configuration
 export const LLMConfigSchema = z.object({
-  provider: z.enum(["openai", "anthropic", "local"]),
+  provider: z.enum(["openai", "anthropic", "openrouter", "gemini", "local"]),
   apiKey: z.string().optional(),
   model: z.string(),
   baseUrl: z.string().optional(),

@@ -60,14 +60,33 @@ Success Criteria:
 - All CRUD operations work as expected
 `;
 
-// Example LLM Configuration
-const llmConfig = {
+// Example LLM Configurations
+const openaiConfig = {
   provider: "openai",
   apiKey: process.env.OPENAI_API_KEY || "your-api-key-here",
   model: "gpt-4",
   temperature: 0.7,
   maxTokens: 4000
 };
+
+const openrouterConfig = {
+  provider: "openrouter",
+  apiKey: process.env.OPENROUTER_API_KEY || "your-openrouter-api-key-here",
+  model: "openai/gpt-4",
+  temperature: 0.7,
+  maxTokens: 4000
+};
+
+const geminiConfig = {
+  provider: "gemini",
+  apiKey: process.env.GEMINI_API_KEY || "your-google-api-key-here",
+  model: "gemini-1.5-pro",
+  temperature: 0.7,
+  maxTokens: 4000
+};
+
+// Default config
+const llmConfig = openaiConfig;
 
 // Example usage functions
 async function exampleUsage() {
@@ -110,15 +129,38 @@ async function individualToolExamples() {
   console.log("\n🔧 Individual Tool Examples:\n");
 
   // Example 1: Requirements Analysis
-  console.log("Example 1: Requirements Analysis");
-  console.log("Tool: analyze_requirements");
-  console.log("Parameters:");
-  console.log(JSON.stringify({
-    prd: taskManagerPRD,
-    projectName: "TaskManager",
-    projectDescription: "A modern task management application"
-  }, null, 2));
-  console.log();
+console.log("Example 1: Requirements Analysis");
+console.log("Tool: analyze_requirements");
+console.log("Parameters:");
+console.log(JSON.stringify({
+  prd: taskManagerPRD,
+  projectName: "TaskManager",
+  projectDescription: "A modern task management application"
+}, null, 2));
+console.log();
+
+// Example 1b: Requirements Analysis with different providers
+console.log("Example 1b: Requirements Analysis with OpenRouter");
+console.log("Tool: analyze_requirements");
+console.log("Parameters:");
+console.log(JSON.stringify({
+  prd: taskManagerPRD,
+  projectName: "TaskManager",
+  projectDescription: "A modern task management application",
+  llmConfig: openrouterConfig
+}, null, 2));
+console.log();
+
+console.log("Example 1c: Requirements Analysis with Gemini");
+console.log("Tool: analyze_requirements");
+console.log("Parameters:");
+console.log(JSON.stringify({
+  prd: taskManagerPRD,
+  projectName: "TaskManager",
+  projectDescription: "A modern task management application",
+  llmConfig: geminiConfig
+}, null, 2));
+console.log();
 
   // Example 2: Architecture Creation
   console.log("Example 2: Architecture Creation");
@@ -337,5 +379,8 @@ module.exports = {
   showGeneratedProjectStructure,
   showGeneratedFiles,
   taskManagerPRD,
-  llmConfig
+  llmConfig,
+  openaiConfig,
+  openrouterConfig,
+  geminiConfig
 };

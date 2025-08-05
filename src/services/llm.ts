@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { LLMConfig, LLMConfigSchema } from '../types.js';
 
 export interface LLMResponse {
@@ -15,6 +16,7 @@ export class LLMService {
   private config: LLMConfig;
   private openai?: OpenAI;
   private anthropic?: Anthropic;
+  private gemini?: GoogleGenerativeAI;
 
   constructor(config: LLMConfig) {
     this.config = LLMConfigSchema.parse(config);
@@ -41,6 +43,21 @@ export class LLMService {
           baseURL: this.config.baseUrl,
         });
         break;
+      case 'openrouter':
+        if (!this.config.apiKey) {
+          throw new Error('OpenRouter API key is required');
+        }
+        this.openai = new OpenAI({
+          apiKey: this.config.apiKey,
+          baseURL: 'https://openrouter.ai/api/v1',
+        });
+        break;
+      case 'gemini':
+        if (!this.config.apiKey) {
+          throw new Error('Google API key is required for Gemini');
+        }
+        this.gemini = new GoogleGenerativeAI(this.config.apiKey);
+        break;
       case 'local':
         // For local models, we'll use OpenAI-compatible API
         if (!this.config.baseUrl) {
@@ -66,6 +83,8 @@ export class LLMService {
         return await this.generateOpenAIResponse(prompt, systemPrompt, temp);
       } else if (this.anthropic) {
         return await this.generateAnthropicResponse(prompt, systemPrompt, temp);
+      } else if (this.gemini) {
+        return await this.generateGeminiResponse(prompt, systemPrompt, temp);
       } else {
         throw new Error('No LLM provider configured');
       }
@@ -168,6 +187,37 @@ Code:`;
 
     const response = await this.generateResponse(codePrompt, systemPrompt, 0.3);
     return this.extractCodeFromResponse(response.content, language);
+  }
+
+  private async generateGeminiResponse(
+    prompt: string,
+    systemPrompt?: string,
+    temperature?: number
+  ): Promise<LLMResponse> {
+    if (!this.gemini) throw new Error('Gemini client not initialized');
+
+    const model = this.gemini.getGenerativeModel({ 
+      model: this.config.model,
+      generationConfig: {
+        temperature,
+        maxOutputTokens: this.config.maxTokens,
+      }
+    });
+
+    const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
+
+    const result = await model.generateContent(fullPrompt);
+    const response = await result.response;
+    const text = response.text();
+
+    return {
+      content: text || '',
+      usage: {
+        promptTokens: 0, // Gemini doesn't provide token usage in this API
+        completionTokens: 0,
+        totalTokens: 0,
+      },
+    };
   }
 
   private extractCodeFromResponse(response: string, language: string): string {

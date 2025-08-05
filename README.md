@@ -24,7 +24,7 @@ A comprehensive Model Context Protocol (MCP) server that enables clients (Cursor
 - **Backend**: Node.js/Express, Python/FastAPI, Go
 - **Databases**: PostgreSQL, MongoDB, SQLite
 - **Deployment**: Docker, Kubernetes, GitHub Actions, GitLab CI
-- **LLM Providers**: OpenAI, Anthropic, Local models
+- **LLM Providers**: OpenAI, Anthropic, OpenRouter, Gemini, Local models
 
 ## 📋 MCP Tools
 
@@ -176,6 +176,28 @@ The server supports multiple LLM providers. Configure your preferred provider:
 }
 ```
 
+#### OpenRouter
+```json
+{
+  "provider": "openrouter",
+  "apiKey": "your-openrouter-api-key",
+  "model": "openai/gpt-4",
+  "temperature": 0.7,
+  "maxTokens": 4000
+}
+```
+
+#### Gemini
+```json
+{
+  "provider": "gemini",
+  "apiKey": "your-google-api-key",
+  "model": "gemini-1.5-pro",
+  "temperature": 0.7,
+  "maxTokens": 4000
+}
+```
+
 #### Local Models
 ```json
 {
@@ -205,6 +227,7 @@ initialize_services({
 
 2. **Execute a complete project**
 ```bash
+# Using OpenAI
 execute_project({
   "prd": "Create a task management application with user authentication, CRUD operations for tasks, and real-time updates.",
   "projectName": "TaskManager",
@@ -213,6 +236,30 @@ execute_project({
     "provider": "openai",
     "apiKey": "your-api-key",
     "model": "gpt-4"
+  }
+})
+
+# Using OpenRouter
+execute_project({
+  "prd": "Create a task management application with user authentication, CRUD operations for tasks, and real-time updates.",
+  "projectName": "TaskManager",
+  "projectDescription": "A modern task management application",
+  "llmConfig": {
+    "provider": "openrouter",
+    "apiKey": "your-openrouter-api-key",
+    "model": "openai/gpt-4"
+  }
+})
+
+# Using Gemini
+execute_project({
+  "prd": "Create a task management application with user authentication, CRUD operations for tasks, and real-time updates.",
+  "projectName": "TaskManager",
+  "projectDescription": "A modern task management application",
+  "llmConfig": {
+    "provider": "gemini",
+    "apiKey": "your-google-api-key",
+    "model": "gemini-1.5-pro"
   }
 })
 ```
@@ -372,6 +419,12 @@ npm run test:coverage
 3. Make your changes
 4. Add tests for new functionality
 5. Submit a pull request
+
+## 📚 Documentation
+
+- [Project Summary](PROJECT_SUMMARY.md) - Complete project overview
+- [LLM Providers Guide](LLM_PROVIDERS.md) - Detailed configuration for all supported AI providers
+- [Examples](examples/) - Usage examples and demonstrations
 
 ## 📄 License
 
