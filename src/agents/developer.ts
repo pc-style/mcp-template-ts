@@ -141,7 +141,7 @@ Generate all necessary files with their complete content.`;
     return { feature };
   }
 
-  private async createProjectStructure(task: AgentTask): Promise<{ project_structure: string }> {
+  private async createProjectStructure(task: AgentTask): Promise<{ projectStructure: string }> {
     this.logTaskStart(task);
 
     const prompt = `
@@ -165,8 +165,8 @@ Generate all necessary files with their complete content.`;
 
     const projectStructure = await this.generateResponse(prompt);
     
-    this.logTaskComplete(task, { project_structure: projectStructure });
-    return { project_structure: projectStructure };
+    this.logTaskComplete(task, { projectStructure: projectStructure });
+    return { projectStructure: projectStructure };
   }
 
   private async generateCode(task: AgentTask): Promise<{ code_files: CodeFile[] }> {
@@ -271,7 +271,7 @@ Focus on:
     return { test_files: testFiles };
   }
 
-  private async codeReview(task: AgentTask): Promise<{ review_results: any }> {
+  private async codeReview(task: AgentTask): Promise<{ reviewResults: any }> {
     const codeContent = task.result?.code_content;
     const language = task.result?.language || 'typescript';
 
@@ -307,8 +307,8 @@ Provide specific recommendations for improvements.`;
       'Code review ensures high-quality, maintainable code'
     );
 
-    this.logTaskComplete(task, { review_results: reviewResults });
-    return { review_results: reviewResults };
+    this.logTaskComplete(task, { reviewResults: reviewResults });
+    return { reviewResults: reviewResults };
   }
 
   private async refactorCode(task: AgentTask): Promise<{ refactored_code: string }> {

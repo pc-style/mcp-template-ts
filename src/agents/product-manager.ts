@@ -193,7 +193,7 @@ Assign priorities: high (must have), medium (should have), low (nice to have)`;
     return { prioritized_requirements: prioritizedRequirements };
   }
 
-  private async validateRequirements(task: AgentTask): Promise<{ validation_results: any }> {
+  private async validateRequirements(task: AgentTask): Promise<{ validationResults: any }> {
     const requirements = this.context.requirements;
     const userStories = this.context.user_stories;
 
@@ -225,8 +225,8 @@ Check for:
       'Validation ensures quality and completeness of project specifications'
     );
 
-    this.logTaskComplete(task, { validation_results: validationResults });
-    return { validation_results: validationResults };
+    this.logTaskComplete(task, { validationResults: validationResults });
+    return { validationResults: validationResults };
   }
 
   private async createRequirementsDocumentation(requirements: Requirement[], userStories: UserStory[]): Promise<void> {

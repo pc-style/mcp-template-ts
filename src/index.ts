@@ -43,7 +43,7 @@ server.tool(
   "analyze_requirements",
   "Analyze a Product Requirements Document (PRD) and extract structured requirements",
   AnalyzeRequirementsSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { prd_content, project_name, project_description } = args;
     
     const projectContext: any = {
@@ -99,7 +99,7 @@ server.tool(
   "create_architecture",
   "Create system architecture and technical specifications based on requirements",
   CreateArchitectureSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { requirements, user_stories, project_constraints } = args;
     
     const projectContext: any = {
@@ -155,7 +155,7 @@ server.tool(
   "implement_feature",
   "Implement a specific feature based on user stories and technical specifications",
   ImplementFeatureSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { feature_id, user_stories, tech_stack, api_specs, database_schema, project_path } = args;
     
     const projectContext: any = {
@@ -214,7 +214,7 @@ server.tool(
   "create_tests",
   "Create comprehensive test suites for implemented features",
   CreateTestsSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { features, tech_stack, test_types, project_path } = args;
     
     const projectContext: any = {
@@ -272,7 +272,7 @@ server.tool(
   "setup_deployment",
   "Set up deployment configuration and infrastructure",
   SetupDeploymentSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { tech_stack, deployment_type, project_path, environment } = args;
     
     const projectContext: any = {
@@ -329,7 +329,7 @@ server.tool(
   "review_code",
   "Review code for quality, best practices, and potential improvements",
   ReviewCodeSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { code_content, language, context, standards } = args;
     
     const projectContext: any = {
@@ -385,7 +385,7 @@ server.tool(
   "update_documentation",
   "Update project documentation based on current project context",
   UpdateDocumentationSchema.shape,
-  async (args) => {
+  async (args, extra) => {
     const { project_context, documentation_type, project_path } = args;
     
     const orchestrator = new OrchestratorAgent(project_context);
@@ -434,7 +434,7 @@ server.tool(
     project_name: z.string().optional(),
     project_description: z.string().optional(),
   },
-  async (args) => {
+  async (args, extra) => {
     const { prd_content, project_name, project_description } = args;
     
     const projectContext: any = {
@@ -490,7 +490,7 @@ server.tool(
   "get_project_status",
   "Get the current status and progress of a project",
   {},
-  async (args) => {
+  async (args, extra) => {
     const projectContext: any = {
       id: `project_${Date.now()}`,
       name: 'Status Check Project',

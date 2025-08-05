@@ -439,7 +439,7 @@ Focus on providing actionable insights and clear recommendations.`;
     return { test_report: testReport };
   }
 
-  private async validateRequirements(task: AgentTask): Promise<{ validation_results: any }> {
+  private async validateRequirements(task: AgentTask): Promise<{ validationResults: any }> {
     const requirements = this.context.requirements;
     const userStories = this.context.user_stories;
     const testSuites = this.context.test_suites;
@@ -484,8 +484,8 @@ Provide validation results with:
       'Validation ensures all requirements are properly tested'
     );
 
-    this.logTaskComplete(task, { validation_results: validationResults });
-    return { validation_results: validationResults };
+    this.logTaskComplete(task, { validationResults: validationResults });
+    return { validationResults: validationResults };
   }
 
   private async createTestPlanDocumentation(testPlan: string): Promise<void> {

@@ -306,7 +306,7 @@ Recommend a complete tech stack including:
     return { tech_stack: techStack };
   }
 
-  private async createTechnicalSpecs(task: AgentTask): Promise<{ technical_specs: any }> {
+  private async createTechnicalSpecs(task: AgentTask): Promise<{ technicalSpecs: any }> {
     const techStack = this.context.tech_stack;
     const apiSpecs = this.context.api_specs;
     const databaseSchema = this.context.database_schema;
@@ -349,8 +349,8 @@ Create technical specifications that include:
     // Create technical specifications documentation
     await this.createTechnicalSpecsDocumentation(technicalSpecs);
 
-    this.logTaskComplete(task, { technical_specs: technicalSpecs });
-    return { technical_specs: technicalSpecs };
+    this.logTaskComplete(task, { technicalSpecs: technicalSpecs });
+    return { technicalSpecs: technicalSpecs };
   }
 
   private async createArchitectureDocumentation(architecture: string): Promise<void> {

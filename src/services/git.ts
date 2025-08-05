@@ -163,7 +163,7 @@ export class GitService {
       if (options?.to) logOptions['--to'] = options.to;
 
       const log = await this.git.log(logOptions);
-      return Array.from(log.all);
+      return [...log.all];
     } catch (error) {
       this.logger.error('Failed to get Git log', { error });
       throw error;
